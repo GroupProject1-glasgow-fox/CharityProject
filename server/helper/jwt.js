@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken')
 
 
-function generateToken() {
-
+function generateToken(data) {
+    return jwt.sign(data, process.env.SECRET)
 }
 
 
-function verifyToken() {
-
+function verifyToken(data) {
+    return jwt.verify(data, process.env.SECRET)
 }
 
 module.exports = {

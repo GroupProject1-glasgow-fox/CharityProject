@@ -1,5 +1,4 @@
-const express = require('express').Router()
-
+const router = require('express').Router()
 const Controller = require('../controller/userController')
 
 

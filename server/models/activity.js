@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     judul: DataTypes.STRING,
     deskripsi: DataTypes.STRING,
     alokasiWaktu: DataTypes.INTEGER,
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Activity',

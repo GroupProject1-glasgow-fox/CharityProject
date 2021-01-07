@@ -20,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type : DataTypes.STRING,
       validate : {
-        isEmail : {
-          args : true,
-          msg : 'Must Be Email Format'
-        }, 
         notEmpty : {
           args : true,
           msg : 'Email must be filled'
+        },
+        isEmail : {
+          args : true,
+          msg : 'Must Be Email Format'
         }
       }
     },
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks : {
       beforeCreate : (user, option) => {
-        user.password = bcrypt.generatePass(user.password)
+        user.password = generatePass(user.password)
       }
     },
     sequelize,
