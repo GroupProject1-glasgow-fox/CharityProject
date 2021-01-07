@@ -206,6 +206,8 @@ Request:
 
 - headers: access_token (string)
 
+- params: id (integer)
+
 Response Success:
 
 - status: 200
@@ -254,6 +256,8 @@ Response Err unauthorized:
 Request:
 
 - headers: access_token (string)
+
+- params: id (integer)
 
 - data:
 
@@ -314,6 +318,8 @@ Request:
 
 - headers: access_token (string)
 
+- params: id (integer)
+
 Response Success:
 
 - status: 200
@@ -362,6 +368,8 @@ Response Err unauthorized:
 Request:
 
 - headers: access_token (string)
+
+- params: id (integer)
 
 Response Success:
 
