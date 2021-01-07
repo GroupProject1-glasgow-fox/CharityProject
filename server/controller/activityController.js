@@ -161,10 +161,16 @@ class Controller {
     }
 
     static movieList(req, res, next) {
-        let query = ''
+        let query = req.body.searchMovie
 
-        const moviePopular = ''
+        let moviePopular
 
+        if(!query) {
+            moviePopular = `http://www.omdbapi.com/?apikey=${process.env.SECRET_OMDB_KEY}&t=spiderman`
+        } else {
+            moviePopular = `http://www.omdbapi.com/?apikey=${process.env.SECRET_OMDB_KEY}&t=${query}`
+        } 
+        
         axios.get(moviePopular)
         .then(data => {
             if(data) {
