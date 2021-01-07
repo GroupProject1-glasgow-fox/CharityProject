@@ -28,7 +28,7 @@ Request:
 }
 ```
 
-Response:
+Response Success:
 
 - status: 201
 - body:
@@ -38,6 +38,42 @@ Response:
 {
   "id": "integer",
   "email": "string"
+}
+```
+
+Response Err validation email not email:
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Must Be Email Format"
+}
+```
+
+Response Err validation email empty:
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Email must be filled"
+}
+```
+
+Response Err validation password empty:
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Password must be filled"
 }
 ```
 
@@ -54,7 +90,7 @@ Request:
 }
 ```
 
-Response:
+Response Success:
 
 - status: 200
 - body:
@@ -66,13 +102,25 @@ Response:
 }
 ```
 
+Response Err Wrong Pass or Email:
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Email/Password Invalid"
+}
+```
+
 ### GET /activities
 
 Request:
 
 - headers: access_token (string)
 
-Response:
+Response Success:
 
 - status: 201
 - body:
@@ -93,6 +141,18 @@ Response:
 ]
 ```
 
+Response Err unauthenticate(No access_token):
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Please login"
+}
+```
+
 ### POST /activities
 
 Request:
@@ -109,7 +169,7 @@ Request:
 }
 ```
 
-Response:
+Response Success:
 
 - status: 200
 - body:
@@ -128,13 +188,25 @@ Response:
 }
 ```
 
+Response Err unauthenticate(No access_token):
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Please login"
+}
+```
+
 ### GET /activities/:id
 
 Request:
 
 - headers: access_token (string)
 
-Response:
+Response Success:
 
 - status: 200
 - body:
@@ -150,6 +222,30 @@ Response:
     "UserId": "integer",
     "updatedAt": "string",
     "createdAt": "string"
+}
+```
+
+Response Err unauthenticate(No access_token):
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Please login"
+}
+```
+
+Response Err unauthorized:
+
+- status: 401
+- body:
+  ​
+
+```json
+{
+    "message": "Unauthorized"
 }
 ```
 
@@ -169,7 +265,7 @@ Request:
 }
 ```
 
-Response:
+Response Success:
 
 - status: 200
 - body:
@@ -185,6 +281,30 @@ Response:
     "UserId": "integer",
     "updatedAt": "string",
     "createdAt": "string"
+}
+```
+
+Response Err unauthenticate(No access_token):
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Please login"
+}
+```
+
+Response Err unauthorized:
+
+- status: 401
+- body:
+  ​
+
+```json
+{
+    "message": "Unauthorized"
 }
 ```
 
@@ -194,7 +314,7 @@ Request:
 
 - headers: access_token (string)
 
-Response:
+Response Success:
 
 - status: 200
 - body:
@@ -213,13 +333,37 @@ Response:
 }
 ```
 
+Response Err unauthenticate(No access_token):
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Please login"
+}
+```
+
+Response Err unauthorized:
+
+- status: 401
+- body:
+  ​
+
+```json
+{
+    "message": "Unauthorized"
+}
+```
+
 ### DELETE /activities/:id
 
 Request:
 
 - headers: access_token (string)
 
-Response:
+Response Success:
 
 - status: 200
 - body:
@@ -228,5 +372,29 @@ Response:
 ```json
 {
   "message": "Activity deleted"
+}
+```
+
+Response Err unauthenticate(No access_token):
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+    "message": "Please login"
+}
+```
+
+Response Err unauthorized:
+
+- status: 401
+- body:
+  ​
+
+```json
+{
+    "message": "Unauthorized"
 }
 ```
