@@ -123,12 +123,12 @@ class Controller {
         let getNews = []
 
         axios.get(breakingNews)
-        .then(data => {
-            if(data) {
+        .then(response => {
+            if(response) {
                 for(let i = 0 ; i < 10; i++) {
-                    getNews.push(data.data.data[i])
+                    getNews.push(response.data.data[i])
                 }
-                res.status(200).json(getNews)
+                res.status(200).json(data)
             } else {
                 throw {
                     status : 401,
@@ -145,13 +145,17 @@ class Controller {
         
         const dataCovid = 'https://data.covid19.go.id/public/api/update.json'
 
+        const getData = []
+
         axios.get(dataCovid)
-        .then(data => {
-            if(data) {
-                res.status(200).json({
-                    dataCovid19 : data.data,
-                    updateCovid19 : data.update
-                })    
+        .then(response => {
+            if(response) {
+                getData.push({
+                    dataCovid : response.data.data,
+                    updateCovid : response.data.update.penambahan
+                })
+
+                res.status(200).json(getData)
             } else {
                 throw {
                     status: 401,
