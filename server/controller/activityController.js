@@ -151,8 +151,8 @@ class Controller {
         .then(response => {
             if(response) {
                 getData.push({
-                    dataCovid : data.data.data,
-                    updateCovid : data.data.update.penambahan
+                    dataCovid : response.data.data,
+                    updateCovid : response.data.update.penambahan
                 })
 
                 res.status(200).json(getData)
