@@ -153,8 +153,8 @@ class Controller {
         .then(data => {
             if(data) {
                 res.status(200).json({
-                    data : data.data,
-                    update : data.update
+                    dataCovid : data.data,
+                    updateCovid : data.update
                 })    
             } else {
                 throw {
