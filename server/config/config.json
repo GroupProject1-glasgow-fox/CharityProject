@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "andrianm28",
-    "password": "",
+    "username": "postgres",
+    "password": "postgres",
     "database": "staycation_app_db",
     "host": "127.0.0.1",
     "dialect": "postgres"

@@ -2,6 +2,7 @@ var baseurl = 'http://localhost:3000'
 $(document).ready( () => {
     auth()
     getMusic()
+    covidUpdate()
 } )
 
 function auth() {
@@ -12,12 +13,14 @@ function auth() {
         $(".main-content").show()
         $(".create").hide()
         $(".edit").hide()
+        $('.show-covid-info').show()
         getData()
     } else {
         $(".login").show()
         $(".register").hide()
         $("#user").hide()
         $(".main-content").hide()
+        $('.show-covid-info').show()
     }
 }
 
@@ -275,3 +278,28 @@ for (let i = 0; i < 3; i++) {
     </div>`
 }
 $('.news-list').append(okee)
+
+function covidUpdate() {
+    $('.show-covid-info').empty()
+    $.ajax({
+        method : 'GET',
+        url : `${baseurl}/covid`,
+    })
+    .done(data => {
+        let dataODP = data.dataCovid.jumlah_odp
+        let positif = data.updateCovid.jumlah_positif
+        let meninggal = data.updateCovid.jumlah_meninggal
+        let sembuh = data.updateCovid.jumlah_sembuh
+
+        $('#terkonfirmasi').val(dataODP)
+        $('#positif').val(positif)
+        $('#meninggal').val(meninggal)
+        $('#sembuh').val(sembuh)
+    })
+    .fail(err => {
+        console.log(err)
+    })
+    .always(() => {
+
+    })
+}
