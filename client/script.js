@@ -1,6 +1,8 @@
 var baseurl = 'http://localhost:3000'
 $(document).ready( () => {
     auth()
+    getMusic()
+    covidUpdate()
 } )
 
 function auth() {
@@ -11,12 +13,14 @@ function auth() {
         $(".main-content").show()
         $(".create").hide()
         $(".edit").hide()
+        $('.show-covid-info').show()
         getData()
     } else {
         $(".login").show()
         $(".register").hide()
         $("#user").hide()
         $(".main-content").hide()
+        $('.show-covid-info').show()
     }
 }
 
@@ -279,6 +283,48 @@ function addCreate(title, desc, duration){
     } )
     .always( () => {
     } )
+}
+
+let okee
+for (let i = 0; i < 3; i++) {
+    okee += `
+    <div class="news-list">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+    </div>`
+}
+$('.news-list').append(okee)
+
+function covidUpdate() {
+    $('.show-covid-info').empty()
+    $.ajax({
+        method : 'GET',
+        url : `${baseurl}/covid`,
+    })
+    .done(data => {
+        let dataODP = data.dataCovid.jumlah_odp
+        let positif = data.updateCovid.jumlah_positif
+        let meninggal = data.updateCovid.jumlah_meninggal
+        let sembuh = data.updateCovid.jumlah_sembuh
+
+        $('#terkonfirmasi').val(dataODP)
+        $('#positif').val(positif)
+        $('#meninggal').val(meninggal)
+        $('#sembuh').val(sembuh)
+    })
+    .fail(err => {
+        console.log(err)
+    })
+    .always(() => {
+
+    })
 }
 
 function getCovid() {
