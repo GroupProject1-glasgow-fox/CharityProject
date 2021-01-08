@@ -152,9 +152,10 @@ class Controller {
         axios.get(dataCovid)
         .then(data => {
             if(data) {
-
-
-                res.status(200).json(data)    
+                res.status(200).json({
+                    data : data.data,
+                    update : data.update
+                })    
             } else {
                 throw {
                     status: 401,
