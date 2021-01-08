@@ -30,7 +30,10 @@ module.exports = (sequelize, DataTypes) => {
           args : true,
           msg : 'Deskripsi tidak boleh kosong'
         }, 
-
+        len : {
+          args : [6],
+          msg : 'Deskripsi minimal diisi 6 karakter'
+        }
       }
     },
     alokasiWaktu: {
@@ -39,10 +42,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty : {
           args : true,
           msg : 'Alokasi waktu harus diisi'
-        },
-        len : {
-          args : [6],
-          msg : 'Deskripsi minimal diisi 6 karakter'
         }
       }
     },

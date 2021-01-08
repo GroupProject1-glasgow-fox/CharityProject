@@ -11,6 +11,7 @@ function auth() {
         $(".main-content").show()
         $(".create").hide()
         $(".edit").hide()
+        getData()
     } else {
         $(".login").show()
         $(".register").hide()
@@ -72,8 +73,12 @@ $("#register").on( "click", (even) => {
 
     } )
 } )
-
-$('#logout').on( 'click', (even) => {
+$("#toCreate").on("click", (even) => {
+    even.preventDefault()
+    $(".create").fadeIn()
+    $(".edit").hide()
+} )
+$('#logout').on( "click", (even) => {
     even.preventDefault()
     localStorage.clear()
     $('#email').val('')
@@ -81,7 +86,11 @@ $('#logout').on( 'click', (even) => {
     auth()
 } )
 
-function create(params) {
+$('#buat').on( 'click', (even) => {
+    create()
+} )
+
+function create() {
     var judul = $('#judul').val()
     var deskripsi = $('#deskripsi').val()
     var alokasiWaktu = $('#alokasiWaktu').val()
@@ -94,14 +103,14 @@ function create(params) {
         data: {
             judul,
             deskripsi,
-            alokasiWaktu,
-            //id
+            alokasiWaktu
         }
     })
     .done( data => {
-        $(".create").hide()
-        $(".home").fadeIn()
-        getData()
+        console.log(data)
+        // $(".create").hide()
+        // $(".home").fadeIn()
+        // getData()
     } )
     .fail( err => {
         console.log(err);
@@ -120,12 +129,12 @@ function getData() {
 
     })
     .done( data => {
-        let dataActivities = '<tbody>'
+        console.log(data)
+        let dataActivities //= '<tbody>'
         data.forEach( el => {
-            dataActivities += `<tr><td>${el.judul}</td><td>${el.deskripsi}</td><td>${el.alokasiWaktu}</td></tr>`
+            dataActivities += `<tr><td>${el.judul}</td><td>${el.deskripsi}</td><td>${el.alokasiWaktu}</td> <td> <button class="btn btn-primary"> Edit </button>  <button class="btn btn-primary"> Delete </button> </td></tr>`
         } )
-        dataActivities += '<td>Edit</td></tbody>'
-        $('.allActivities').html(dataActivities)
+        $('.allActivities').append( dataActivities)
     } )
     .fail( err => {
         console.log(err);
@@ -134,13 +143,13 @@ function getData() {
     } )
 }
 
-function edit() {
+function edit(id) {
     var judul = $('#judul').val()
     var deskripsi = $('#deskripsi').val()
     var alokasiWaktu = $('#alokasiWaktu').val()
     $.ajax({
         method: 'PUT',
-        url: `${baseurl}/activities`,//with id
+        url: `${baseurl}/activities/${id}`,//with id
         headers: {
             access_token: localStorage.access_token
         },
@@ -148,7 +157,6 @@ function edit() {
             judul,
             deskripsi,
             alokasiWaktu,
-            //id
         }
     })
     .done( data => {
@@ -163,10 +171,10 @@ function edit() {
     } )
 }
 
-function deleteData() {
+function deleteData(id) {
     $.ajax({
         method: 'DELETE',
-        url: `${baseurl}/activities`,//with id
+        url: `${baseurl}/activities/${id}`,//with id
         headers: {
             access_token: localStorage.access_token
         },
