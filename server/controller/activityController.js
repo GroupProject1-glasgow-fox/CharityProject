@@ -127,14 +127,14 @@ class Controller {
     static cnnNews(req, res, next) {
         const breakingNews = 'https://www.news.developeridn.com/'
 
-        // let getNews = []
+        let getNews = []
 
         axios.get(breakingNews)
-        .then(data => {
+        .then(response => {
             if(data) {
-                // for(let i = 0 ; i < 10; i++) {
-                //     getNews.push(data.data[i])
-                // }
+                for(let i = 0 ; i < 10; i++) {
+                    getNews.push(response.data.data[i])
+                }
                 res.status(200).json(data)
             } else {
                 throw {
@@ -152,14 +152,17 @@ class Controller {
         
         const dataCovid = 'https://data.covid19.go.id/public/api/update.json'
 
+        const getData = []
+
         axios.get(dataCovid)
         .then(data => {
             if(data) {
-                // res.status(200).json({
-                //     dataCovid19 : data.data,
-                //     updateCovid19 : data.update
-                // })    
-                res.status(200).json(data)
+                getData.push({
+                    dataCovid : response.data.data,
+                    updateCovid : response.data.update.penambahan
+                })
+
+                res.status(200).json(getData)
             } else {
                 throw {
                     status: 401,
