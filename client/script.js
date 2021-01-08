@@ -1,7 +1,7 @@
 var baseurl = 'http://localhost:3000'
 $(document).ready( () => {
     auth()
-    getMusic()
+    getCovid()
 } )
 
 function auth() {
@@ -259,19 +259,55 @@ function addCreate(title, desc, duration){
     create()
 }
 
-let okee
-for (let i = 0; i < 3; i++) {
+let okee = ``
+for (let i = 0; i < 10; i++) {
     okee += `
-    <div class="news-list">
+    <li class="list-group-item">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
             </div>
-          </div>
-    </div>`
+        </div><br>
+    </li>`
 }
 $('.news-list').append(okee)
+
+
+
+function getCovid() {
+    let covid = ``
+    $.ajax({
+        method: 'GET',
+        url: `${baseurl}/activities/covid`,
+    })
+    .done( data => {
+        covid += `
+            <li class="list-group-item">
+                <h3>${data.dataCovid.total_spesimen}</h3>
+                <p>Terkonfirmasi</p>
+            </li>
+            <li class="list-group-item">
+                <h3></h3>
+                <p>Dalam Perawatan</p>
+            </li>
+            <li class="list-group-item">
+                <h3></h3>
+                <p>Sembuh</p>
+            </li>
+            <li class="list-group-item">
+                <h3></h3>
+                <p>Meninggal</p>
+            </li>
+        `
+        $('.covid-stats').append(covid)
+    })
+    .fail( err => {
+        console.log(err);
+    } )
+    .always( () => {
+    } )
+}

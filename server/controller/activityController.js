@@ -131,11 +131,11 @@ class Controller {
 
         axios.get(breakingNews)
         .then(response => {
-            if(data) {
+            if(response) {
                 for(let i = 0 ; i < 10; i++) {
                     getNews.push(response.data.data[i])
                 }
-                res.status(200).json(data)
+                res.status(200).json(getNews)
             } else {
                 throw {
                     status : 401,
@@ -158,8 +158,8 @@ class Controller {
         .then(data => {
             if(data) {
                 getData.push({
-                    dataCovid : response.data.data,
-                    updateCovid : response.data.update.penambahan
+                    dataCovid : data.data.data,
+                    updateCovid : data.data.update.penambahan
                 })
 
                 res.status(200).json(getData)
