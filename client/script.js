@@ -238,7 +238,7 @@ function getNews() {
                         <h5 class="card-title">Baca Berita</h5>
                         <h6 class="card-subtitle mb-2 text-muted">${el.tipe}</h6>
                         <p class="card-text">${title}</p>
-                        <button class="btn btn-primary" onclick="addCreate('Baca Berita ${desc}', '${title}', 5)">Tambahkan Aktifitas</button>
+                        <button class="btn btn-primary" onclick="addCreate('Baca Berita ${desc}', '${title}', 5)">Rencanakan</button>
                     </div>
                 </div><br>
             </li>`
