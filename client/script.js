@@ -90,10 +90,36 @@ $('#logout').on( "click", (even) => {
 $('#buat').on( 'click', (even) => {
     create()
 } )
-$("#toCreate").on("click", (even) => {
+
+$('#save').on( 'click', (even) => {
     even.preventDefault()
-    $(".create").fadeIn()
-    $(".edit").hide()
+    var judul = $('#juduledit').val()
+    var deskripsi = $('#deskripsiedit').val()
+    var alokasiWaktu = $('#alokasiWaktuedit').val()
+    var id = $('#UserId').val()
+    console.log(judul, deskripsi, alokasiWaktu, id);
+    $.ajax({
+        method: 'PUT',
+        url: `${baseurl}/activities/${id}`,
+        headers: {
+            access_token: localStorage.access_token
+        },
+        data: {
+            judul,
+            deskripsi,
+            alokasiWaktu,
+        }
+    })
+    .done( data => {
+        $(".edit").hide()
+        $(".home").fadeIn()
+        getData()
+    } )
+    .fail( err => {
+        console.log(err);
+    } )
+    .always( () => {
+    } )
 } )
 
 function create() {
@@ -148,26 +174,23 @@ function getData() {
     } )
 }
 
-function edit(id) {
-    var judul = $('#judul').val()
-    var deskripsi = $('#deskripsi').val()
-    var alokasiWaktu = $('#alokasiWaktu').val()
+function getEdit(id) {
+    $(".create").hide()
+    $(".home").hide()
+    $('.edit').fadeIn()
     $.ajax({
-        method: 'PUT',
-        url: `${baseurl}/activities/${id}`,//with id
+        method: 'GET',
+        url: `${baseurl}/activities/${id}`,
         headers: {
             access_token: localStorage.access_token
         },
-        data: {
-            judul,
-            deskripsi,
-            alokasiWaktu,
-        }
+
     })
     .done( data => {
-        $(".edit").hide()
-        $(".home").fadeIn()
-        getData()
+        $('#juduledit').val(`${data.judul}`)
+        $('#deskripsiedit').val(`${data.deskripsi}`)
+        $('#alokasiWaktuedit').val(`${data.alokasiWaktu}`)
+        $('#UserId').val(`${id}`)
     } )
     .fail( err => {
         console.log(err);

@@ -67,7 +67,7 @@
             </div>
             <div class="col-sm-4"></div>
         </div>
-        <main class="container main-content mt-5">
+        <main class="container main-content">
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-9">
@@ -92,7 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="create mt-5">
+                    <div class="create">
                         <h2> Form Rencana </h2>
                         <form class="formCreate">
                             <div class="form-group">
@@ -112,8 +112,9 @@
                             </div>
                         </form>
                     </div>
-                    <div class="edit mt-5">
-                        <form class="formCreate">
+                    <div class="edit">
+                        <h2> Edit Rencana </h2>
+                        <form class="formEdit">
                             <div class="form-group">
                                 <label for="juduledit">Judul Kegiatan</label>
                                 <input type="text" class="form-control" name="juduledit" id="juduledit" placeholder="Nonton Film">
@@ -124,7 +125,10 @@
                             </div>
                             <div class="form-group">
                               <label for="alokasiWaktuedit">Estimasi Durasi (jam)</label>
-                              <input type="number" class="form-control" name="alokasiWaktuedit" id="alokasiWaktuedit" placeholder="5">
+                              <input type="number" class="form-control" name="alokasiWaktuedit" id="alokasiWaktuedit" placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <input type="hidden" class="form-control" name="UserId" id="UserId" >
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" id="save" style="width: 10rem;">Edit</button>
@@ -165,5 +169,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <!-- Optional JavaScript -->
         <script src="./script.js"></script>
+        <script src="./widget.js"></script>
     </body>
 </html>
