@@ -218,52 +218,24 @@ function deleteData(id) {
     } )
 }
 
-function getMovies() {
-    let list
-    $.ajax({
-        method: 'GET',
-        url: `${baseurl}/activities/movies`,
-    })
-    .done( data => {
-        data.forEach(el => {
-            // const title = `${el.title} ${el.year} rate: ${el.Rated}` 
-            // const desc = 
-            // const waktu =
-            list += `
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">${title}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">${el.sub_title}</h6>
-                  <p class="card-text">${el.desc}</p> 
-                  <button class="btn btn-primary" onclick="create(${el.id})"> Tambahkan Rencana </button>
-                </div>
-              </div>`
-        })
-        $('.news-list').append(list)
-    })
-    .fail( err => {
-        console.log(err);
-    } )
-    .always( () => {
-    } )
-}
-
-
 function getNews() {
     let list
     $.ajax({
         method: 'GET',
-        url: `${baseurl}/activities/movies`,
+        url: `${baseurl}/activities/news`,
     })
     .done( data => {
         data.forEach(el => {
+            let title = `${el.title}`
+            let desc = `${el.desc}`
+            let duration = `${el.duration}`
             list += `
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">${el.title} ${el.year} rate: ${el.Rated}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">${el.sub_title}</h6>
                   <p class="card-text">${el.desc}</p> 
-                  <button class="btn btn-primary" onclick="create(${el.id})"> Tambahkan Rencana </button>
+                  <button class="btn btn-primary" onclick="addCreate(${title}, ${desc}, ${duration})"> Tambahkan Rencana </button>
                 </div>
               </div>`
         })
@@ -276,29 +248,10 @@ function getNews() {
     } )
 }
 
-function getMusic() {
-    let list
-    $.ajax({
-        method: 'GET',
-        url: `${baseurl}/activities/music`,
-    })
-    .done( data => {
-        data.forEach(el => {
-            list += `
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">${el.title} ${el.year} rate: ${el.Rated}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">${el.sub_title}</h6>
-                  <p class="card-text">${el.desc}</p> 
-                  <button class="btn btn-primary" onclick="create(${el.id})"> Tambahkan Rencana </button>
-                </div>
-              </div>`
-        })
-        $('.news-list').append(list)
-    })
-    .fail( err => {
-        console.log(err);
-    } )
-    .always( () => {
-    } )
+function addCreate(title, desc, duration){
+    even.preventDefault()
+    $('#juduledit').text(title)
+    $('#deskripsiedit').text(desc)
+    $('#alokasiWaktuedit').text(duration)
+    create()
 }
