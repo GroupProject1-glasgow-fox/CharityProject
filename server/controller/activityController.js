@@ -124,10 +124,15 @@ class Controller {
     static cnnNews(req, res, next) {
         const breakingNews = 'https://www.news.developeridn.com/'
 
+        let getNews = []
+
         axios.get(breakingNews)
         .then(data => {
             if(data) {
-                res.status(200).json(data)
+                for(let i = 0 ; i <= 10; i++) {
+                    getNews.push(data.data[i])
+                }
+                res.status(200).json(getNews)
             } else {
                 throw {
                     status : 401,
@@ -147,6 +152,8 @@ class Controller {
         axios.get(dataCovid)
         .then(data => {
             if(data) {
+
+
                 res.status(200).json(data)    
             } else {
                 throw {
