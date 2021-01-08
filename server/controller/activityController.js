@@ -108,20 +108,13 @@ class Controller {
     static async getWeather(req, res, next) {
         const weatherLink = 'https://www.metaweather.com/api/location/1047378/'
 
-        try {
-            const getData = await axios.get(weatherLink)
-
-            if(getData) {
-                res.status(200).json(getData)
-            } else {
-                throw {
-                    status : 401,
-                    message : 'Bad Request'
-                }
-            }
-        } catch (err) {
-            next(err)
-        }
+        axios.get(weatherLink)
+        .then(data => {
+            res.status(200).json(data.data.consolidated_weather)
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
     }
 
     static cnnNews(req, res, next) {
@@ -133,7 +126,7 @@ class Controller {
         .then(data => {
             if(data) {
                 for(let i = 0 ; i < 10; i++) {
-                    getNews.push(data.data[i])
+                    getNews.push(data.data.data[i])
                 }
                 res.status(200).json(getNews)
             } else {
