@@ -238,12 +238,12 @@ function getNews() {
                         <h5 class="card-title">Baca Berita</h5>
                         <h6 class="card-subtitle mb-2 text-muted">${el.tipe}</h6>
                         <p class="card-text">${title}</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <button class="btn btn-primary" onclick="addCreate('Baca Berita ${desc}', '${title}', 5)">Tambahkan Aktifitas</button>
                     </div>
                 </div><br>
             </li>`
         })
+        $('.news-list').empty()
         $('.news-list').append(list)
     })
     .fail( err => {
@@ -254,31 +254,32 @@ function getNews() {
 }
 
 function addCreate(title, desc, duration){
-    even.preventDefault()
-    $('#juduledit').text(title)
-    $('#deskripsiedit').text(desc)
-    $('#alokasiWaktuedit').text(duration)
-    create()
+    var judul = title
+    var deskripsi = desc
+    var alokasiWaktu = duration
+    $.ajax({
+        method: 'POST',
+        url: `${baseurl}/activities`,
+        headers: {
+            access_token: localStorage.access_token
+        },
+        data: {
+            judul,
+            deskripsi,
+            alokasiWaktu
+        }
+    })
+    .done( data => {
+        $(".create").hide()
+        $(".home").fadeIn()
+        getData()
+    } )
+    .fail( err => {
+        console.log(err);
+    } )
+    .always( () => {
+    } )
 }
-
-// let okee = ``
-// for (let i = 0; i < 10; i++) {
-//     okee += `
-//     <li class="list-group-item">
-//         <div class="card" style="width: 18rem;">
-//             <div class="card-body">
-//                 <h5 class="card-title">Card title</h5>
-//                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-//                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//                 <a href="#" class="card-link">Card link</a>
-//                 <a href="#" class="card-link">Another link</a>
-//             </div>
-//         </div><br>
-//     </li>`
-// }
-// $('.news-list').append(okee)
-
-
 
 function getCovid() {
     let covid = ``
