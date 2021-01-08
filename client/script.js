@@ -1,7 +1,6 @@
 var baseurl = 'http://localhost:3000'
 $(document).ready( () => {
     auth()
-    getCovid()
 } )
 
 function auth() {
@@ -78,6 +77,7 @@ $("#toCreate").on("click", (even) => {
     even.preventDefault()
     $(".create").fadeIn()
     $(".edit").hide()
+    getNews()
 } )
 $('#logout').on( "click", (even) => {
     even.preventDefault()
@@ -222,19 +222,22 @@ function getNews() {
     $.ajax({
         method: 'GET',
         url: `${baseurl}/activities/news`,
+        headers: {
+            access_token: localStorage.access_token
+        }
     })
     .done( data => {
         data.forEach(el => {
-            let title = `${el.title}`
-            let desc = `${el.desc}`
-            let duration = `${el.duration}`
+            let title = `${el.judul}`
+            let desc = `${el.tipe}`
+            let duration = `${el.waktu}`
             list += `
-            <li class="list-group-item news-list">
+            <li class="list-group-item">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Baca Berita</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${el.tipe}</h6>
+                        <p class="card-text">${title}</p>
                         <a href="#" class="card-link">Card link</a>
                         <a href="#" class="card-link">Another link</a>
                     </div>
@@ -258,22 +261,22 @@ function addCreate(title, desc, duration){
     create()
 }
 
-let okee = ``
-for (let i = 0; i < 10; i++) {
-    okee += `
-    <li class="list-group-item">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div><br>
-    </li>`
-}
-$('.news-list').append(okee)
+// let okee = ``
+// for (let i = 0; i < 10; i++) {
+//     okee += `
+//     <li class="list-group-item">
+//         <div class="card" style="width: 18rem;">
+//             <div class="card-body">
+//                 <h5 class="card-title">Card title</h5>
+//                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+//                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+//                 <a href="#" class="card-link">Card link</a>
+//                 <a href="#" class="card-link">Another link</a>
+//             </div>
+//         </div><br>
+//     </li>`
+// }
+// $('.news-list').append(okee)
 
 
 
