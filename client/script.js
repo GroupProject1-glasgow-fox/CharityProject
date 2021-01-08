@@ -230,14 +230,17 @@ function getNews() {
             let desc = `${el.desc}`
             let duration = `${el.duration}`
             list += `
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">${el.title} ${el.year} rate: ${el.Rated}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">${el.sub_title}</h6>
-                  <p class="card-text">${el.desc}</p> 
-                  <button class="btn btn-primary" onclick="addCreate(${title}, ${desc}, ${duration})"> Tambahkan Rencana </button>
-                </div>
-              </div>`
+            <li class="list-group-item news-list">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div><br>
+            </li>`
         })
         $('.news-list').append(list)
     })
@@ -255,3 +258,20 @@ function addCreate(title, desc, duration){
     $('#alokasiWaktuedit').text(duration)
     create()
 }
+
+let okee
+for (let i = 0; i < 3; i++) {
+    okee += `
+    <div class="news-list">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+    </div>`
+}
+$('.news-list').append(okee)
