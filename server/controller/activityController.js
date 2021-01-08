@@ -1,5 +1,6 @@
 const { Activity } = require('../models')
 
+const axios = require('axios')
 
 class Controller {
     static async getActivity (req, res, next) {
@@ -101,6 +102,111 @@ class Controller {
         }
     }
 
+    static async getWeather(req, res, next) {
+        const weatherLink = 'https://www.metaweather.com/api/location/1047378/'
+
+        try {
+            const getData = await axios.get(weatherLink)
+
+            if(getData) {
+                res.status(200).json(getData)
+            } else {
+                throw {
+                    status : 401,
+                    message : 'Bad Request'
+                }
+            }
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static cnnNews(req, res, next) {
+        const breakingNews = 'https://www.news.developeridn.com/'
+
+        axios.get(breakingNews)
+        .then(data => {
+            if(data) {
+                res.status(200).json(data)
+            } else {
+                throw {
+                    status : 401,
+                    message : 'bad request'
+                }
+            } 
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    static covidUpdate(req, res, next) {
+        
+        const dataCovid = 'https://data.covid19.go.id/public/api/update.json'
+
+        axios.get(dataCovid)
+        .then(data => {
+            if(data) {
+                res.status(200).json(data)    
+            } else {
+                throw {
+                    status: 401,
+                    message: "bad Request"
+                }
+            }
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    static movieList(req, res, next) {
+        let query = req.body.searchMovie
+
+        let moviePopular
+
+        if(!query) {
+            moviePopular = `http://www.omdbapi.com/?apikey=${process.env.SECRET_OMDB_KEY}&t=spiderman`
+        } else {
+            moviePopular = `http://www.omdbapi.com/?apikey=${process.env.SECRET_OMDB_KEY}&t=${query}`
+        } 
+        
+        axios.get(moviePopular)
+        .then(data => {
+            if(data) {
+                res.status(200).json(data)
+            } else {
+                throw {
+                    status : 401,
+                    message : 'Bad request'
+                }
+            }
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    static musicList(req, res, next) {
+        let query = ''
+
+        const musicPlay = ''
+
+        axios.get(musicPlay)
+        .then(data => {
+            if(data) {
+                res.status(200).json(data)
+            } else {
+                throw {
+                    status : 401,
+                    message : 'Bad request'
+                }
+            }
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
 }
 
 module.exports = Controller

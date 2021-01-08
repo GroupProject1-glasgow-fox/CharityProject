@@ -14,9 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Activity.init({
-    judul: DataTypes.STRING,
-    deskripsi: DataTypes.STRING,
-    alokasiWaktu: DataTypes.INTEGER,
+    judul: {
+      type : DataTypes.STRING,
+      validate: {
+        notEmpty : {
+          args : true,
+          msg : 'Judul harus diisi'
+        }
+      }
+    },
+    deskripsi: {
+      type : DataTypes.STRING,
+      validate : {
+        notEmpty : {
+          args : true,
+          msg : 'Deskripsi tidak boleh kosong'
+        }, 
+
+      }
+    },
+    alokasiWaktu: {
+      type : DataTypes.INTEGER,
+      validate : {
+        notEmpty : {
+          args : true,
+          msg : 'Alokasi waktu harus diisi'
+        },
+        len : {
+          args : [6],
+          msg : 'Deskripsi minimal diisi 6 karakter'
+        }
+      }
+    },
     UserId: DataTypes.INTEGER,
     status: DataTypes.STRING
   }, {
