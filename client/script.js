@@ -89,6 +89,11 @@ $('#logout').on( "click", (even) => {
 $('#buat').on( 'click', (even) => {
     create()
 } )
+$("#toCreate").on("click", (even) => {
+    even.preventDefault()
+    $(".create").fadeIn()
+    $(".edit").hide()
+} )
 
 function create() {
     var judul = $('#judul').val()
@@ -107,10 +112,9 @@ function create() {
         }
     })
     .done( data => {
-        console.log(data)
-        // $(".create").hide()
-        // $(".home").fadeIn()
-        // getData()
+        $(".create").hide()
+        $(".home").fadeIn()
+        getData()
     } )
     .fail( err => {
         console.log(err);
@@ -120,6 +124,7 @@ function create() {
 }
 
 function getData() {
+    $('.allActivities').empty()
     $.ajax({
         method: 'GET',
         url: `${baseurl}/activities`,//with id
@@ -129,10 +134,9 @@ function getData() {
 
     })
     .done( data => {
-        console.log(data)
-        let dataActivities //= '<tbody>'
+        let dataActivities 
         data.forEach( el => {
-            dataActivities += `<tr><td>${el.judul}</td><td>${el.deskripsi}</td><td>${el.alokasiWaktu}</td> <td> <button class="btn btn-primary"> Edit </button>  <button class="btn btn-primary"> Delete </button> </td></tr>`
+            dataActivities += `<tr><td>${el.judul}</td><td>${el.deskripsi}</td><td>${el.alokasiWaktu}</td> <td> <button class="btn btn-primary" onclick="getEdit(${el.id})"> Edit </button>  <button class="btn btn-primary" onclick="deleteData(${el.id})"> Delete </button> </td></tr>`
         } )
         $('.allActivities').append( dataActivities)
     } )
