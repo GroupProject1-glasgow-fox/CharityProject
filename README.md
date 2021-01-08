@@ -1,1 +1,1 @@
-# Server
+# Staycation Guideline

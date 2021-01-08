@@ -1,0 +1,15 @@
+.main {
+    flex: 1 1 0; /* flex: 1, which you had before, is equivalent but doesn't work */
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.myNavBar {
+    position: fixed;
+    z-index: 5;
+}
+
+.main-content {
+    padding-top: 4.5rem;
+}
