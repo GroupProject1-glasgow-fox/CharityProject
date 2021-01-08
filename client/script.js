@@ -1,6 +1,7 @@
 var baseurl = 'http://localhost:3000'
 $(document).ready( () => {
     auth()
+    getMusic()
 } )
 
 function auth() {
@@ -187,6 +188,21 @@ function deleteData(id) {
     .done( data => {
         getData()
     } )
+    .fail( err => {
+        console.log(err);
+    } )
+    .always( () => {
+    } )
+}
+
+function getMusic() {
+    $.ajax({
+        method: 'GET',
+        url: `https://data.covid19.go.id/public/api/update.json`,//with id
+    })
+    .done( data => {
+        console.log(data);
+    })
     .fail( err => {
         console.log(err);
     } )
