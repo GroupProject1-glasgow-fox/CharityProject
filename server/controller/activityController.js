@@ -131,7 +131,7 @@ class Controller {
 
         axios.get(breakingNews)
         .then(response => {
-            if(data) {
+            if(response) {
                 for(let i = 0 ; i < 10; i++) {
                     getNews.push(response.data.data[i])
                 }
@@ -155,8 +155,8 @@ class Controller {
         const getData = []
 
         axios.get(dataCovid)
-        .then(data => {
-            if(data) {
+        .then(response => {
+            if(response) {
                 getData.push({
                     dataCovid : response.data.data,
                     updateCovid : response.data.update.penambahan
