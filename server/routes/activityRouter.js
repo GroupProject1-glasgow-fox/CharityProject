@@ -10,6 +10,7 @@ router.get('/music', Controller.musicList)
 router.get('/news', Controller.cnnNews)
 router.get('/covid', Controller.covidUpdate)
 router.get('/movie', Controller.movieList)
+router.get('/weather', Controller.getWeather)
 
 router.get('/:id', authorize, Controller.getActivityById)
 router.put('/:id', authorize, Controller.editActivityById)

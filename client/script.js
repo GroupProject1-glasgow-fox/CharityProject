@@ -107,7 +107,7 @@ $('#save').on( 'click', (even) => {
         data: {
             judul,
             deskripsi,
-            alokasiWaktu,
+            alokasiWaktu
         }
     })
     .done( data => {
@@ -183,8 +183,7 @@ function getEdit(id) {
         url: `${baseurl}/activities/${id}`,
         headers: {
             access_token: localStorage.access_token
-        },
-
+        }
     })
     .done( data => {
         $('#juduledit').val(`${data.judul}`)
