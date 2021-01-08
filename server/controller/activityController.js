@@ -1,5 +1,8 @@
 const { Activity } = require('../models')
 
+if(process.env.NODE_ENV != 'production'){
+    require('dotenv').config()
+}
 const axios = require('axios')
 
 class Controller {
@@ -153,8 +156,8 @@ class Controller {
         .then(data => {
             if(data) {
                 res.status(200).json({
-                    dataCovid : data.data,
-                    updateCovid : data.update
+                    dataCovid19 : data.data,
+                    updateCovid19 : data.update
                 })    
             } else {
                 throw {
@@ -178,7 +181,8 @@ class Controller {
         } else {
             moviePopular = `http://www.omdbapi.com/?apikey=${process.env.SECRET_OMDB_KEY}&t=${query}`
         } 
-        
+
+             
         axios.get(moviePopular)
         .then(data => {
             if(data) {
